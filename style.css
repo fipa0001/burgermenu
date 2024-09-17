@@ -1,0 +1,169 @@
+/* Navbar (desktop) */
+.logo {
+  width: 80px;
+  height: auto;
+}
+
+/* Fjerner punkttegn fra listen og justerer teksten til højre */
+ul {
+  list-style-type: none;
+  text-align: right;
+}
+
+/* Gør listeelementerne inline, så de vises i en række */
+li {
+  display: inline;
+}
+
+/* Definerer linkets font, farve, størrelse og tekstjustering.
+Fjerner understregning, centrerer indholdet og tilføjer afrundede hjørner med en radius på 40px.
+Mellemrum (padding) på 20px omkring linkene
+Justify-content: space-evenly sørger for der er lige fordelt plads mellem elementerne (links) */
+li a {
+  font-family: "Raleway", sans-serif;
+  color: black;
+  font-size: 20px;
+  text-align: right;
+  text-decoration: none;
+  justify-content: space-evenly;
+  border-radius: 40px;
+  padding: 20px;
+}
+
+/* Ændrer farven til #f28181 ved hover og for aktive links */
+.navbar li a:hover {
+  color: #f28181;
+}
+
+a.active {
+  color: #f28181;
+}
+
+/*  sticy: positioneret element indtil en bestemt scroll-position nås, hvorefter det bliver fastgjort og opfører sig som et fast positioneret element.
+sticky: menuen forbliver øverst på siden, når man scroller ned */
+header {
+  background-color: white;
+  position: sticky;
+  padding: 0.8rem 2rem;
+}
+
+/* Containeren fylder hele bredden og centrerer indholdet både vandret og lodret
+justify-content: centrere flex-elementerne horisontalt inden for containeren. */
+.container {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subcontainer {
+  width: auto;
+  margin: auto;
+}
+
+/* Navigationen fylder hele bredden og har en minimumshøjde på 70px. Indholdet fordeles med plads mellem elementerne og er centreret vertikalt 
+Display: flex; er en CSS-egenskab, gør container til en fleksibel boks. Flexbox er en layoutmodel, der gør det nemmere at designe komplekse layouts og justere elementer inde i en container.*/
+.navbar {
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* justify-content: space-between; er en CSS-egenskab, der bruges i flexbox-layout til at justere flex-elementerne med lige stor afstand mellem dem. */
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Hamburger-ikonet er skjult som standard. Det består af tre stænger med specificerede dimensioner og overgangseffekter.
+Cursor: pointer; håndmakør*/
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 30px;
+  height: 3px;
+  margin: 5px 0;
+  transition: all 0.8s ease;
+  background-color: black;
+}
+
+/* Når skærmbredden er mindre end 1200px, tilpasses containeren og subcontaineren til 100% bredde.
+Hamburger-ikonet vises og får en højere z-index */
+
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+
+  .subcontainer {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: block;
+    z-index: 2;
+  }
+
+  /* Hamburger animation krydset */
+  /* Når hamburgeren er aktiv, forsvinder den midterste stang, og de andre to roterer for at danne et kryds */
+
+  /* Anden streg (midtstregen) bliver usynlig, opacaity = usynlig. */
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  /* Første streg flyttes ned og drejes, så den danner den øverste del af et kryds. */
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  /* Tredje streg flyttes op og drejes, så den danner den nederste del af et kryds.*/
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav-menu {
+    position: absolute;
+    left: -100%; /* Placerer menuen uden for skærmen til venstre. Dette skjuler menuen.*/
+    top: 88px; /* Placerer menuen 88 pixels ned fra toppen af.*/
+    gap: 0; /* fjerner mellemrum mellem elementer */
+    flex-direction: column; /* Retter menuens elementer lodret (kolonne layout)*/
+    background-color: white;
+    width: 100%; /* Gør menuen bred som hele skærmens bredde.*/
+    text-align: center;
+    transition: 0.3s; /* vis menu: klik på hambruger og klassen active og left ændres til 0, pga transition vil menuen glidende brvæge sig ind på skærmen over 0,3 sek.*/
+    z-index: 2; /* bestemmer lag-ordenen, til 2, placerer menuen over elementer med lavere z-index.*/
+  }
+
+  .nav-item {
+    margin: 16px 0;
+  }
+
+  /* nav-menu får klassen active, ændres dens venstre position til 0, trækker menuen ind på skærmen og gør den synlig.*/
+  .nav-menu.active {
+    left: 0;
+  }
+}
+
+/* 
+DESKTOP:
+Container = hele menuen
+Subcaontainer = menuen uden mellemrum i siderne 
+Nav-item = links 
+Navbar = selve baren
+
+MOBILE:
+hambrugermenu med og uden active (åben og lukket)
+bar = stregerne
+a = links 
+Navmenu med og uden active (på skærmen og ikke på skærmen)
+*/
